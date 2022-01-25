@@ -1,7 +1,7 @@
 import { useState } from "react";
-import ExpenseItem from "./ExpenseItem";
 import Card from "../UI/Card";
 import ExpensesFilter from "../ExpensesFilter/ExpensesFilter";
+import ExpensesList from "./ExpensesList";
 import("./Expenses.css");
 
 function Expenses(props) {
@@ -17,6 +17,7 @@ function Expenses(props) {
     setSelectedDate(selectedYear);
   };
 
+
   return (
     <div>
       <Card className="expenses">
@@ -24,15 +25,7 @@ function Expenses(props) {
           selected={selectedDate}
           onSaveDateSelected={saveDateSelectedHandler}
         />
-
-        {filteredExpenses.map((expense) => 
-          <ExpenseItem
-            key={expense.id}
-            title={expense.title}
-            amount={expense.amount}
-            date={expense.date}
-          />
-        )}
+        <ExpensesList filteredExpenses={filteredExpenses}/>
       </Card>
     </div>
   );
