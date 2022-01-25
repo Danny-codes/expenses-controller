@@ -6,6 +6,12 @@ import("./Expenses.css");
 
 function Expenses(props) {
   const [selectedDate, setSelectedDate] = useState("2020");
+  const items = props.items
+
+  
+  const filteredExpenses = items.filter(expense => {
+    return expense.date.getFullYear().toString()  === selectedDate
+  })
 
   const saveDateSelectedHandler = (selectedYear) => {
     setSelectedDate(selectedYear);
@@ -18,13 +24,15 @@ function Expenses(props) {
           selected={selectedDate}
           onSaveDateSelected={saveDateSelectedHandler}
         />
-        {props.items.map((expense) => (
+
+        {filteredExpenses.map((expense) => 
           <ExpenseItem
+            key={expense.id}
             title={expense.title}
             amount={expense.amount}
             date={expense.date}
           />
-        ))}
+        )}
       </Card>
     </div>
   );
